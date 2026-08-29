@@ -15,8 +15,10 @@ public sealed class LibraryLoanService
     }
     public DateOnly ProcessLoan(Loan loan)
     {
+        // Calculate the due date using the dedicated calculator.
         var dueDate = _dueDateCalculator.Calculate(loan);
 
+        // Save the loan and its calculated due date.
         _loanRepository.Save(loan, dueDate);
 
         return dueDate;
@@ -27,6 +29,7 @@ public sealed class LibraryLoanService
 
         if (currentDate > dueDate)
         {
+            // Notify the member only when the current date is past the due date.
             _overdueNotifier.Notify(loan.MemberId, dueDate);
         }
     }
