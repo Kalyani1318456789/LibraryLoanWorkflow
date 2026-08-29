@@ -195,6 +195,16 @@ The current test suite contains:
 The tests have been successfully executed using the command line and Visual Studio Test Explorer.
 
 ---
+##  References
+
+1. **Microsoft Learn - C# Documentation**  
+   Used as a reference for C# classes, interfaces, records, and language features. 
+   https://learn.microsoft.com/en-us/dotnet/csharp/
+
+3. **Single Responsibility Principle (SRP)**  
+   Wikipedia – Used as a reference for understanding the Single Responsibility Principle.
+   https://dotnettutorials.net/lesson/single-responsibility-principle/  
+   https://en.wikipedia.org/wiki/Single-responsibility_principle
 
 
 
