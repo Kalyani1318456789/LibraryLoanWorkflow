@@ -212,9 +212,6 @@ The tests cover:
 
 The due-date calculation is tested independently from the other parts of the system.
 
-### Documentation
-
-This README documents the problem, design, class responsibilities, SRP application, testing approach, limitations, and commands required to build and test the project.
 
 ---
 
@@ -231,34 +228,6 @@ The current implementation is intentionally small and has some limitations:
 
 These limitations are acceptable for the scope of this assignment because the main focus is demonstrating the **Single Responsibility Principle**.
 
----
-
-## Project Structure
-
-```text
-LibraryLoanWorkflow/
-│
-├── LibraryLoanWorkflow.Core/
-│   ├── Loan.cs
-│   ├── DueDateCalculator.cs
-│   ├── ILoanRepository.cs
-│   ├── LoanRepository.cs
-│   ├── IOverdueNotifier.cs
-│   ├── OverdueNotifier.cs
-│   ├── LibraryLoanService.cs
-│   └── LibraryLoanWorkflow.Core.csproj
-│
-├── UnitTests/
-│   ├── DueDateCalculatorTests.cs
-│   ├── LibraryLoanServiceTests.cs
-│   └── UnitTests.csproj
-│
-├── README.md
-├── LICENSE
-├── .gitignore
-├── .gitattributes
-└── LibraryLoanWorkflow.slnx
-```
 
 ---
 
