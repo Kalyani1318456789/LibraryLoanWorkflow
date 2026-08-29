@@ -1,164 +1,60 @@
-# Library Loan Workflow
+# A19 | Library Loan Workflow
 
-## 1. Problem Specification
+A small library loan workflow implemented in C# to demonstrate separation of responsibilities and the Single Responsibility Principle.
 
-This project implements a small library loan workflow using the
-Single Responsibility Principle (SRP).
+## Project Overview
 
-The system is responsible for:
+This project models the basic workflow of borrowing a book from a library.
+
+The system handles:
 
 - Representing a library loan.
-- Calculating the due date for a loan.
-- Persisting loan information.
-- Notifying a member when a loan is overdue.
-- Coordinating these responsibilities through a small service.
+- Calculating the due date.
+- Saving loan information.
+- Checking whether a loan is overdue.
+- Notifying a member when a loan becomes overdue.
+- Coordinating these operations through a service.
 
-A loan contains:
+Each loan contains a Book ID, Member ID and the date on which the book was borrowed.
 
-- Book ID
-- Member ID
-- Borrowed date
-
-The library rule used in this implementation is that a loan is due
-30 days after the borrowing date.
-
-A loan is considered overdue when the current date is later than
-the calculated due date.
-
-There is no console application. The unit-test project acts as the
-executable/test client for the class library.
+The loan period used in this implementation is **30 days**.
 
 ---
 
-## 2. Architecture
+## Minimum Requirements
 
-The project is divided into two projects:
+The implementation provides:
 
-### LibraryLoanWorkflow.Core
-
-This is the class library containing the production implementation.
-
-It contains:
-
-- `Loan`
-- `DueDateCalculator`
-- `ILoanRepository`
-- `LoanRepository`
-- `IOverdueNotifier`
-- `OverdueNotifier`
-- `LibraryLoanService`
-
-### UnitTests
-
-This project contains automated tests for the class library.
-
-It uses xUnit to test the behaviour of the production classes.
+- A `Loan` model for representing loan information.
+- A due-date calculation component.
+- A repository abstraction for storing loans.
+- An overdue notification abstraction.
+- A service that coordinates the complete loan workflow.
+- Unit tests for the implemented behaviour.
+- A class library implementation with no separate console application.
+- Command-line build and test support.
 
 ---
 
-## 3. Design
+## Design Overview
 
-The design follows the Single Responsibility Principle.
-
-Each class has one primary responsibility.
+The project separates the different responsibilities into individual classes and interfaces.
 
 ### Loan
 
-Represents the data associated with a library loan.
+`Loan` represents a library loan.
 
 It contains:
 
-- Book ID
-- Member ID
-- Borrowed date
+- `BookId`
+- `MemberId`
+- `BorrowedOn`
 
 ### DueDateCalculator
 
-Responsible only for calculating the due date.
+`DueDateCalculator` is responsible for calculating when a loan is due.
 
 The current rule is:
 
-`Due Date = Borrowed Date + 30 days`
-
-The calculation is isolated so that changes to the library's due-date
-rules do not require changes to the loan service.
-
-### ILoanRepository / LoanRepository
-
-`ILoanRepository` defines the persistence boundary.
-
-`LoanRepository` stores loans and their calculated due dates in memory.
-
-The service does not directly manage the storage collection.
-
-### IOverdueNotifier / OverdueNotifier
-
-`IOverdueNotifier` defines the notification boundary.
-
-`OverdueNotifier` is responsible for notifying a member when a loan
-has become overdue.
-
-The service therefore does not need to know how notifications are
-actually delivered.
-
-### LibraryLoanService
-
-The service coordinates the other responsibilities.
-
-For a new loan it:
-
-1. Requests the due date from `DueDateCalculator`.
-2. Saves the loan and due date through `ILoanRepository`.
-3. Returns the calculated due date.
-
-For overdue checking it:
-
-1. Calculates the due date.
-2. Compares it with the supplied current date.
-3. Notifies the member through `IOverdueNotifier` if the loan is overdue.
-
----
-
-## 4. Design Sketch
-
 ```text
-                    +----------------------+
-                    |         Loan         |
-                    |----------------------|
-                    | BookId               |
-                    | MemberId             |
-                    | BorrowedOn           |
-                    +----------+-----------+
-                               |
-                               |
-                               v
-                    +----------------------+
-                    | LibraryLoanService    |
-                    |----------------------|
-                    | ProcessLoan()         |
-                    | CheckOverdue()        |
-                    +----+-------------+----+
-                         |             |
-              calculates|             |saves
-                         |             |
-                         v             v
-              +----------------+   +------------------+
-              |DueDateCalculator|   |ILoanRepository  |
-              +----------------+   +--------+---------+
-                                             |
-                                             v
-                                     +---------------+
-                                     |LoanRepository |
-                                     +---------------+
-
-                    CheckOverdue()
-                          |
-                          v
-                 +-------------------+
-                 | IOverdueNotifier  |
-                 +---------+---------+
-                           |
-                           v
-                 +-------------------+
-                 |  OverdueNotifier  |
-                 +-------------------+
+Due Date = Borrowed Date + 30 days
