@@ -3,6 +3,6 @@
     <File Path=".editorconfig" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="../LibraryLoanWorkflow.core/LibraryLoanWorkflow.Core.csproj" />
+  <Project Path="LibraryLoanWorkflow/LibraryLoanWorkflow.core/LibraryLoanWorkflow.Core.csproj" />
   <Project Path="UnitTests/UnitTests.csproj" />
 </Solution>
