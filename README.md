@@ -176,26 +176,6 @@ The architecture uses a small set of classes and interfaces rather than putting 
 
 The repository and notification components are accessed through interfaces, which reduces direct coupling to their implementations.
 
-### Design
-
-The design follows SRP by giving the classes clear reasons to change.
-
-For example:
-
-* A change to the due-date rule affects `DueDateCalculator`.
-* A change to storage affects `LoanRepository`.
-* A change to notification behaviour affects `OverdueNotifier`.
-* Changes to the overall workflow affect `LibraryLoanService`.
-
-This makes the design easier to maintain than having all these responsibilities inside one large class.
-
-### Implementation
-
-The project is implemented as a **C# 8.0 compatible class library** targeting `.NET 8.0`.
-
-The implementation uses simple classes and interfaces so that the SRP design remains easy to see.
-
-No separate console application is included. The unit test project acts as the executive for the implementation.
 
 ### Testing
 
