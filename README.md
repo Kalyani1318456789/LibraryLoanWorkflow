@@ -102,24 +102,6 @@ The following diagram shows the main classes, interfaces, and their relationship
 ![Library Loan Workflow Class Diagram](ClassDiagram.png)
 ---
 
-## Single Responsibility Principle
-
-The project demonstrates SRP by giving each component one main responsibility.
-
-| Component            | Responsibility               |
-| -------------------- | ---------------------------- |
-| `Loan`               | Represents loan information  |
-| `DueDateCalculator`  | Calculates the due date      |
-| `LoanRepository`     | Stores loan information      |
-| `OverdueNotifier`    | Handles overdue notification |
-| `LibraryLoanService` | Coordinates the workflow     |
-
-For example, the `LibraryLoanService` does not contain the actual due-date calculation logic or persistence logic. It delegates these operations to the appropriate components.
-
-This keeps the classes smaller and makes the system easier to understand, test, and modify.
-
----
-
 ## Critical Analysis
 
 ### Specification
