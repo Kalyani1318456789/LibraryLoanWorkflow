@@ -95,51 +95,11 @@ When checking for an overdue loan:
 
 ---
 
-## Class Diagram
+### Class Diagram
 
-```text
-                         ┌────────────────────┐
-                         │        Loan        │
-                         ├────────────────────┤
-                         │ BookId             │
-                         │ MemberId           │
-                         │ BorrowedOn         │
-                         └─────────┬──────────┘
-                                   │
-                                   │
-                                   ▼
-                    ┌──────────────────────────┐
-                    │    LibraryLoanService    │
-                    ├──────────────────────────┤
-                    │ ProcessLoan()            │
-                    │ CheckOverdue()           │
-                    └───────┬──────────┬───────┘
-                            │          │
-                            │          │
-                calculates │          │ saves
-                            ▼          ▼
-                 ┌────────────────┐  ┌──────────────────┐
-                 │DueDateCalculator│  │ILoanRepository  │
-                 └────────────────┘  └────────┬─────────┘
-                                               │
-                                               ▼
-                                      ┌──────────────────┐
-                                      │ LoanRepository   │
-                                      └──────────────────┘
+The following diagram shows the main classes, interfaces, and their relationships in the library loan workflow.
 
-                    CheckOverdue()
-                           │
-                           ▼
-                 ┌────────────────────┐
-                 │ IOverdueNotifier   │
-                 └─────────┬──────────┘
-                           │
-                           ▼
-                  ┌──────────────────┐
-                  │ OverdueNotifier  │
-                  └──────────────────┘
-```
-
+![Library Loan Workflow Class Diagram](ClassDiagram.png)
 ---
 
 ## Single Responsibility Principle
